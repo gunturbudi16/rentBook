@@ -45,7 +45,7 @@ module.exports = {
 
   editRentBookPhoto: (id, photo) => {
     return new Promise((resolve, reject) => {
-      const query = `INSERT INTO rentBook SET photo = '${photo}' WHERE id = '${id}'`;
+      const query = `UPDATE rentBook SET photo = '${photo}' WHERE id = '${id}'`;
       conn.query(query, (err, result) => {
         if (!err) {
           resolve(result);

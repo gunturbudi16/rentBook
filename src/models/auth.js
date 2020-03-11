@@ -64,13 +64,13 @@ module.exports = {
 
   changePassword: (email, password) => {
     return new Promise((resolve, reject) => {
-      const q =
+      const query =
         "UPDATE users SET password='" +
         password +
         "' WHERE email='" +
         email +
         "'";
-      conn.query(q, (err, result) => {
+      conn.query(query, (err, result) => {
         if (!err) {
           resolve(result);
         } else {
@@ -80,11 +80,11 @@ module.exports = {
     });
   },
 
-  update: (id, is_admin) => {
+  update: (id, isAdmin) => {
     return new Promise((resolve, reject) => {
-      const q =
-        "UPDATE users SET is_admin='" + is_admin + "' WHERE id='" + id + "'";
-      conn.query(q, (err, result) => {
+      const query =
+        "UPDATE users SET is_admin='" + isAdmin + "' WHERE id='" + id + "'";
+      conn.query(query, (err, result) => {
         if (!err) {
           resolve(result);
         } else {

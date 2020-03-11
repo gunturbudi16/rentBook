@@ -10,10 +10,10 @@ require("dotenv").config();
 module.exports = {
   register: (req, res) => {
     const { id, email, name } = req.body;
-    const is_admin = false;
+    const isAdmin = false;
     const salt = bcrypt.genSaltSync(saltRounds);
     const password = bcrypt.hashSync(req.body.password, salt);
-    const data = { id, email, password, is_admin };
+    const data = { id, email, password, is_admin: isAdmin };
     const checkEmail = emailRegex.test(email);
 
     if (checkEmail === true) {
@@ -26,7 +26,7 @@ module.exports = {
               res.status(200).json({
                 status: 200,
                 error: false,
-                user: { id, name, email, is_admin },
+                user: { id, name, email, isAdmin },
                 detail: result,
                 message: "Successfull Register New User"
               });
@@ -72,9 +72,9 @@ module.exports = {
               if (result) {
                 const id = result.id;
                 const email = result.email;
-                const is_admin = result.is_admin;
+                const isAdmin = result.is_admin;
                 const token = JWT.sign(
-                  { id, email, is_admin },
+                  { id, email, isAdmin },
                   process.env.SECRET,
                   { expiresIn: "12h" }
                 );
@@ -82,7 +82,7 @@ module.exports = {
                   status: 201,
                   message: "Success Login",
                   token,
-                  user: { id, email, is_admin },
+                  user: { id, email, isAdmin },
                   detail: "This token only valid for 12 hour"
                 });
               } else {
@@ -118,17 +118,21 @@ module.exports = {
         });
       });
   },
-  update: (id, isSeller) => {
-    return new Promise((resolve, reject) => {
-      const q =
-        "UPDATE users SET is_seller='" + isSeller + "' WHERE id='" + id + "'";
-      conn.query(q, (err, result) => {
-        if (!err) {
-          resolve(result);
-        } else {
-          reject(new Error(err));
-        }
+  update: (req, res) => {
+    const { isAdmin, id } = req.body;
+    authModel
+      .update(id, isAdmin)
+      .then(result => {
+        res.status(200).json({
+          message: "Success update user",
+          result
+        });
+      })
+      .catch(err => {
+        res.status(400).json({
+          message: "Failed update user",
+          err
+        });
       });
-    });
   }
 };

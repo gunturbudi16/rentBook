@@ -1126,11 +1126,6 @@ registry-url@^3.0.3:
   dependencies:
     rc "^1.0.1"
 
-resid@^0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/resid/-/resid-0.0.0.tgz#bd55246a84ed061a4ead442691d12f6aa2866752"
-  integrity sha512-UMt7Lcc4WT64ZLcS1gfhRyHeE3U+qnvF0Y/2YF0nLiUgGnXwMQBGCWGiLuKXRrIS1kACiaff/EGCpAW9nJ8vJw==
-
 safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"

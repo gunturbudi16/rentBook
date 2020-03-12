@@ -5,6 +5,6 @@ const auth = require("../controllers/auth");
 
 Route.post("/register", auth.register);
 Route.post("/login", auth.login);
-Route.put("/update", auth.update);
+//Route.put("/update", auth.update);
 
 module.exports = Route;

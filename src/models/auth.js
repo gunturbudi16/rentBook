@@ -78,19 +78,5 @@ module.exports = {
         }
       });
     });
-  },
-
-  update: (id, isAdmin) => {
-    return new Promise((resolve, reject) => {
-      const query =
-        "UPDATE users SET is_admin='" + isAdmin + "' WHERE id='" + id + "'";
-      conn.query(query, (err, result) => {
-        if (!err) {
-          resolve(result);
-        } else {
-          reject(new Error(err));
-        }
-      });
-    });
   }
 };
